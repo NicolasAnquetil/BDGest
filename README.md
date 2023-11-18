@@ -12,5 +12,6 @@ Load with :
 Metacello new
   baseline: 'BDGest';
   repository: 'github://NicolasAnquetil/BDGest:main/src';
+	onWarning: #continue ;
   load.
 ```
