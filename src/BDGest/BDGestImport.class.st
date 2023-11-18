@@ -10,16 +10,26 @@ Class {
 	#name : #BDGestImport,
 	#superclass : #Object,
 	#instVars : [
-		'visitor'
+		'visitor',
+		'library'
 	],
 	#category : #BDGest
 }
 
 { #category : #importing }
+BDGestImport class >> import [
+	^self new
+		import
+]
+
+{ #category : #importing }
 BDGestImport >> import [
 
+	library := BDGestLibrary new.
 	visitor := BDGestVisitor new.
+	visitor library: library.
 	self importFrom: '/home/anquetil/Documents/perso/BDs' asFileReference.
+	^library
 
 ]
 
@@ -28,12 +38,13 @@ BDGestImport >> importFrom: directory [
 
 	| i file |
 	i := 1.
-	[file := directory / ('BDGest Online' , i asString , '.html').
+	self importHTML: (directory / 'BDGest Online1.html').
+"	[file := directory / ('BDGest Online' , i asString , '.html').
 	file exists]
 	whileTrue: [
 		self importHTML: file
 	]
-
+"
 ]
 
 { #category : #importing }
@@ -42,4 +53,10 @@ BDGestImport >> importHTML: bdGestHTMLFile [
 	| dom |
 	dom := bdGestHTMLFile readStreamDo: [ :st | XMLHTMLParser parse: st contents ].
 	dom acceptNodeVisitor: visitor
+]
+
+{ #category : #accessing }
+BDGestImport >> library [
+
+	^ library
 ]
