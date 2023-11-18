@@ -28,7 +28,9 @@ BDGestImport >> import [
 	library := BDGestLibrary new.
 	visitor := BDGestVisitor new.
 	visitor library: library.
+
 	self importFrom: '/home/anquetil/Documents/perso/BDs' asFileReference.
+
 	^library
 
 ]
@@ -38,13 +40,13 @@ BDGestImport >> importFrom: directory [
 
 	| i file |
 	i := 1.
-	self importHTML: (directory / 'BDGest Online1.html').
-"	[file := directory / ('BDGest Online' , i asString , '.html').
-	file exists]
+	[ file := directory / ('BDGest Online' , i asString , '.html').
+	  file exists]
 	whileTrue: [
-		self importHTML: file
+		self importHTML: file.
+		i:=i+1
 	]
-"
+
 ]
 
 { #category : #importing }

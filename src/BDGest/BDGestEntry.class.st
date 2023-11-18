@@ -7,21 +7,21 @@ Class {
 		'titre',
 		'editeur',
 		'depotLegal',
-		'auteur'
+		'auteurs'
 	],
 	#category : #BDGest
 }
 
 { #category : #accessing }
-BDGestEntry >> auteur [
+BDGestEntry >> auteurs [
 
-	^ auteur
+	^ auteurs
 ]
 
 { #category : #accessing }
-BDGestEntry >> auteur: anObject [
+BDGestEntry >> auteurs: anObject [
 
-	auteur := anObject
+	auteurs := anObject
 ]
 
 { #category : #accessing }

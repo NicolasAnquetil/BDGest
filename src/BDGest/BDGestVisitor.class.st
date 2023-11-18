@@ -44,6 +44,16 @@ BDGestVisitor >> put: value toEntryAttribute: getter [
 ]
 
 { #category : #visiting }
+BDGestVisitor >> visitAuteurs: aNodeElement [
+
+	| visitor |
+	visitor := BDGestAuteursVisitor new.
+	aNodeElement acceptNodeVisitor: visitor.
+	self put: visitor auteurs toEntryAttribute: #auteurs
+
+]
+
+{ #category : #visiting }
 BDGestVisitor >> visitCouv: aNodeElement [
 
 	| visitor |
@@ -54,11 +64,31 @@ BDGestVisitor >> visitCouv: aNodeElement [
 ]
 
 { #category : #visiting }
-BDGestVisitor >> visitSerie: aNodeElement [
+BDGestVisitor >> visitDiv: aNodeElement [
 
-	| titre |
-	titre := aNodeElement nodes first asString trim.
-	self put: titre toEntryAttribute: #serie
+	self visit: aNodeElement withKey: (aNodeElement attributeAt: #class ifAbsent: #noKey)
+]
+
+{ #category : #visiting }
+BDGestVisitor >> visitDl: aNodeElement [
+
+	| depotLegal |
+	((aNodeElement attributeAt: 'title') = 'Dépot légal')
+		ifFalse: [ ^self ].
+
+	depotLegal := aNodeElement nodes first asString trim.
+	(depotLegal = '00/0000')
+		ifTrue: [ depotLegal := '' ].
+	self put: depotLegal toEntryAttribute: #depotLegal
+
+]
+
+{ #category : #visiting }
+BDGestVisitor >> visitEditeur: aNodeElement [
+
+	| editeur |
+	editeur := aNodeElement nodes first asString trim.
+	self put: editeur toEntryAttribute: #editeur
 
 ]
 
@@ -89,7 +119,7 @@ BDGestVisitor >> visitTitre: aNodeElement [
 
 
 	| visitor |
-	visitor := BDGestTitreVisitor new.
+	visitor := BDGestTitreSerieVisitor new.
 	visitor visitNodeWithElements: aNodeElement.
 
 	self put: visitor titre toEntryAttribute: #titre.

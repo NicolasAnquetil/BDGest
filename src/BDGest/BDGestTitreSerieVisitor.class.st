@@ -1,5 +1,5 @@
 Class {
-	#name : #BDGestTitreVisitor,
+	#name : #BDGestTitreSerieVisitor,
 	#superclass : #BDGestAbstractVisitor,
 	#instVars : [
 		'titre',
@@ -9,13 +9,13 @@ Class {
 }
 
 { #category : #accessing }
-BDGestTitreVisitor >> serie [
+BDGestTitreSerieVisitor >> serie [
 
 	^ serie
 ]
 
 { #category : #accessing }
-BDGestTitreVisitor >> titre [
+BDGestTitreSerieVisitor >> titre [
 
 	^titre
 		ifNil: [ '' ]
@@ -23,18 +23,18 @@ BDGestTitreVisitor >> titre [
 ]
 
 { #category : #visiting }
-BDGestTitreVisitor >> visitNuma: aNodeElement [
+BDGestTitreSerieVisitor >> visitNuma: aNodeElement [
 
 ]
 
 { #category : #visiting }
-BDGestTitreVisitor >> visitSerie: aNodeElement [
+BDGestTitreSerieVisitor >> visitSerie: aNodeElement [
 
 	serie := aNodeElement nodes first asString trim
 ]
 
 { #category : #visiting }
-BDGestTitreVisitor >> visitStringNode: aStringNode [
+BDGestTitreSerieVisitor >> visitStringNode: aStringNode [
 
 	| string lf |
 	titre ifNil: [ ^self ].
@@ -52,7 +52,7 @@ BDGestTitreVisitor >> visitStringNode: aStringNode [
 ]
 
 { #category : #visiting }
-BDGestTitreVisitor >> visitTitre: aNodeElement [
+BDGestTitreSerieVisitor >> visitTitre: aNodeElement [
 
 	titre := '' writeStream.
 	super visitNodeWithElements: aNodeElement
