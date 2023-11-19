@@ -1,3 +1,14 @@
+"
+Represents a BDGestEntry (one book)
+
+Instance variables:
+- `couverture` -- the url of the picture of the cover
+- `serie` -- name of the serie of books
+- `titre` -- title of the book
+- `editeur` -- publisher's name
+- `depotLegal` -- date of publication
+- `auteurs` -- a collection of authors' names
+"
 Class {
 	#name : #BDGestEntry,
 	#superclass : #Object,
@@ -9,7 +20,7 @@ Class {
 		'depotLegal',
 		'auteurs'
 	],
-	#category : #BDGest
+	#category : #'BDGest-Model'
 }
 
 { #category : #accessing }

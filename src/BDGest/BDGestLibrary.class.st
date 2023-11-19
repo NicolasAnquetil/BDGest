@@ -1,10 +1,17 @@
+"
+A ""collection"" of `BDGestEntry`
+
+API:
+- `entries` returns the entries
+- `newEntry` creates a new empty entry in the library
+"
 Class {
 	#name : #BDGestLibrary,
 	#superclass : #Object,
 	#instVars : [
 		'entries'
 	],
-	#category : #BDGest
+	#category : #'BDGest-Model'
 }
 
 { #category : #accessing }

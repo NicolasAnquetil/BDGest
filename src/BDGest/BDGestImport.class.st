@@ -13,7 +13,7 @@ Class {
 		'visitor',
 		'library'
 	],
-	#category : #BDGest
+	#category : #'BDGest-Import'
 }
 
 { #category : #importing }
@@ -29,7 +29,7 @@ BDGestImport >> import [
 	visitor := BDGestVisitor new.
 	visitor library: library.
 
-	self importFrom: '/home/anquetil/Documents/perso/BDs' asFileReference.
+	self importFrom: self sourceDirectory asFileReference.
 
 	^library
 
@@ -61,4 +61,11 @@ BDGestImport >> importHTML: bdGestHTMLFile [
 BDGestImport >> library [
 
 	^ library
+]
+
+{ #category : #importing }
+BDGestImport >> sourceDirectory [
+
+	^'/home/anquetil/Documents/perso/BDs'
+
 ]

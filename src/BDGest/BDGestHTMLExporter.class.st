@@ -1,10 +1,23 @@
+"
+Exports a `BDGestLibrary` to an HTML file: 'bds-all.html'
+
+API:
+`BDGestHTMLExport export: aBDGestLibrary`
+"
 Class {
 	#name : #BDGestHTMLExporter,
 	#superclass : #Object,
-	#category : #BDGest
+	#category : #'BDGest-Export'
 }
 
 { #category : #'as yet unclassified' }
+BDGestHTMLExporter class >> export: bdGestLibrary [
+
+	^self new
+		export: bdGestLibrary
+]
+
+{ #category : #export }
 BDGestHTMLExporter >> afterText: st [
 
 	st
@@ -12,13 +25,19 @@ BDGestHTMLExporter >> afterText: st [
 		cr
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #export }
 BDGestHTMLExporter >> beforeText: st [
 
 	st << '<font size="4" style="font-size: 16pt">'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #api }
+BDGestHTMLExporter >> export: bdGestLibrary [
+
+	self export: bdGestLibrary to: 'bds-all.html'
+]
+
+{ #category : #api }
 BDGestHTMLExporter >> export: bdGestLibrary to: filename [
 
 	| first |
@@ -35,7 +54,7 @@ BDGestHTMLExporter >> export: bdGestLibrary to: filename [
 	]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #export }
 BDGestHTMLExporter >> exportEntry: aBDGestEntry on: st firstColumn: isFirst [
 
 	isFirst ifTrue: [ st << '<tr>' ; lf ].
@@ -53,7 +72,7 @@ BDGestHTMLExporter >> exportEntry: aBDGestEntry on: st firstColumn: isFirst [
 	isFirst ifFalse: [ st << '</tr' ; lf ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #export }
 BDGestHTMLExporter >> exportEntryAuteurs: aBDGestEntry on: st [
 
 	self beforeText: st.
@@ -66,7 +85,7 @@ BDGestHTMLExporter >> exportEntryAuteurs: aBDGestEntry on: st [
 	self afterText: st
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #export }
 BDGestHTMLExporter >> exportEntryCouverture: aBDGestEntry on: st [
 
 	st
@@ -76,7 +95,7 @@ BDGestHTMLExporter >> exportEntryCouverture: aBDGestEntry on: st [
 		lf
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #export }
 BDGestHTMLExporter >> exportEntryDepotLegal: aBDGestEntry on: st [
 
 	self beforeText: st.
@@ -85,7 +104,7 @@ BDGestHTMLExporter >> exportEntryDepotLegal: aBDGestEntry on: st [
 	self afterText: st
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #export }
 BDGestHTMLExporter >> exportEntryEditeur: aBDGestEntry on: st [
 
 	self beforeText: st.
@@ -94,7 +113,7 @@ BDGestHTMLExporter >> exportEntryEditeur: aBDGestEntry on: st [
 	self afterText: st
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #export }
 BDGestHTMLExporter >> exportEntrySerie: aBDGestEntry on: st [
 
 	self beforeText: st.
@@ -105,7 +124,7 @@ BDGestHTMLExporter >> exportEntrySerie: aBDGestEntry on: st [
 	self afterText: st
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #export }
 BDGestHTMLExporter >> exportEntryTitre: aBDGestEntry on: st [
 
 	self beforeText: st.
@@ -114,13 +133,13 @@ BDGestHTMLExporter >> exportEntryTitre: aBDGestEntry on: st [
 	self afterText: st
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #export }
 BDGestHTMLExporter >> footerOn: st [
 
 	st << '</table></body></html>'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #export }
 BDGestHTMLExporter >> headerOn: st [
 	st << '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>

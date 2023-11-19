@@ -1,3 +1,6 @@
+"
+A specialized `BDGestAbstractVisitor` that extracts the 'title' and 'serie' from an XML subtree
+"
 Class {
 	#name : #BDGestTitreSerieVisitor,
 	#superclass : #BDGestAbstractVisitor,
@@ -5,7 +8,7 @@ Class {
 		'titre',
 		'serie'
 	],
-	#category : #BDGest
+	#category : #'BDGest-Import'
 }
 
 { #category : #accessing }

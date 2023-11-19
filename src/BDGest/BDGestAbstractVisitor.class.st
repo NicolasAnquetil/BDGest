@@ -1,7 +1,14 @@
+"
+An abstract visitor on a HTML DOM of the BDGest export of a library
+
+Visits the DOM and allow to specify some nodes that we are interested in
+An important method is `visit:withKey:` that takes an XML node and a ""key"", builds a visit method from that key (ex: 'abc' will give '#visitAbc:') and looks if the method exist.
+I it exists it is called, if not, the node is visited ""normally""
+"
 Class {
 	#name : #BDGestAbstractVisitor,
 	#superclass : #XMLNodeVisitor,
-	#category : #BDGest
+	#category : #'BDGest-Import'
 }
 
 { #category : #visiting }

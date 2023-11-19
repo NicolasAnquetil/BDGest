@@ -1,10 +1,13 @@
+"
+A specialized `BDGestAbstractVisitor` that extracts the names of auteurs in a list of string from an XML subtree
+"
 Class {
 	#name : #BDGestAuteursVisitor,
 	#superclass : #BDGestAbstractVisitor,
 	#instVars : [
 		'auteurs'
 	],
-	#category : #BDGest
+	#category : #'BDGest-Import'
 }
 
 { #category : #accessing }

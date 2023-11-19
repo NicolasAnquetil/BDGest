@@ -1,3 +1,9 @@
+"
+The main `BDGestAbstractVisitor` that extracts `BDGestEntry`s from an XML DOM
+
+API:
+`BDGestImport import`
+"
 Class {
 	#name : #BDGestVisitor,
 	#superclass : #BDGestAbstractVisitor,
@@ -5,10 +11,10 @@ Class {
 		'currentEntry',
 		'library'
 	],
-	#category : #BDGest
+	#category : #'BDGest-Import'
 }
 
-{ #category : #accessing }
+{ #category : #'entry creation' }
 BDGestVisitor >> entryFor: key [
 
 	currentEntry ifNil: [ ^self newEntry ].
@@ -28,12 +34,12 @@ BDGestVisitor >> library: anObject [
 	library := anObject
 ]
 
-{ #category : #accessing }
+{ #category : #'entry creation' }
 BDGestVisitor >> newEntry [
 	^currentEntry := library newEntry
 ]
 
-{ #category : #visiting }
+{ #category : #'entry creation' }
 BDGestVisitor >> put: value toEntryAttribute: getter [
 
 	| setter |
