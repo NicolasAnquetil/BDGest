@@ -7,10 +7,11 @@ call:
 BDGestImport import.
 ```
 
-requires XMLParserHTML :
+Load with :
 ```St
 Metacello new
-	baseline: 'XMLParserHTML';
-	repository: 'github://pharo-contributions/XML-XMLParserHTML/src';
-	load.
+  baseline: 'BDGest';
+  repository: 'github://NicolasAnquetil/BDGest:main/src';
+	onWarning: #continue ;
+  load.
 ```
