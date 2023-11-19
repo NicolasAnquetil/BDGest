@@ -7,6 +7,12 @@ Class {
 	#category : #BDGest
 }
 
+{ #category : #accessing }
+BDGestLibrary >> entries [
+
+	^ entries
+]
+
 { #category : #initialization }
 BDGestLibrary >> initialize [ 
 

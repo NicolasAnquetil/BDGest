@@ -18,14 +18,11 @@ BDGestAuteursVisitor >> initialize [
 
 	super initialize.
 
-	auteurs := '' writeStream 
+	auteurs := OrderedCollection new
 ]
 
 { #category : #visiting }
 BDGestAuteursVisitor >> visitA: aNodeElement [
 
-	auteurs
-		<< $[ ;
-		<< aNodeElement nodes first asString trim ;
-		<< $]
+	auteurs add: aNodeElement nodes first asString trim
 ]
