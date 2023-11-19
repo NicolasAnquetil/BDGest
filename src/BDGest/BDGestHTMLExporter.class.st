@@ -42,22 +42,24 @@ BDGestHTMLExporter >> export: bdGestLibrary to: filename [
 
 	| first |
 
-	filename asFileReference writeStreamDo: [ :st |
-		self headerOn: st.
-		first := true.
-		bdGestLibrary entries
-			do: [ :entry |
-				self exportEntry: entry on: st firstColumn: first.
-				first := first not
-			].
-		self footerOn: st
-	]
+	filename asFileReference
+		ensureDelete ;
+		writeStreamDo: [ :st |
+			self headerOn: st.
+			first := true.
+			bdGestLibrary entries
+				do: [ :entry |
+					self exportEntry: entry on: st firstColumn: first.
+					first := first not
+				].
+			self footerOn: st
+		]
 ]
 
 { #category : #export }
 BDGestHTMLExporter >> exportEntry: aBDGestEntry on: st firstColumn: isFirst [
 
-	isFirst ifTrue: [ st << '<tr>' ; lf ].
+	isFirst ifTrue: [ st << '<tr>' ; cr ].
 
 	st << '<td>'.
 	self exportEntryCouverture: aBDGestEntry on: st.
@@ -69,10 +71,10 @@ BDGestHTMLExporter >> exportEntry: aBDGestEntry on: st firstColumn: isFirst [
 	self exportEntryAuteurs: aBDGestEntry on: st.
 	st << '</td>'.
 
-	isFirst ifFalse: [ st << '</tr' ; lf ]
+	isFirst ifFalse: [ st << '</tr>' ; cr ]
 ]
 
-{ #category : #export }
+{ #category : #'export entry' }
 BDGestHTMLExporter >> exportEntryAuteurs: aBDGestEntry on: st [
 
 	self beforeText: st.
@@ -85,17 +87,17 @@ BDGestHTMLExporter >> exportEntryAuteurs: aBDGestEntry on: st [
 	self afterText: st
 ]
 
-{ #category : #export }
+{ #category : #'export entry' }
 BDGestHTMLExporter >> exportEntryCouverture: aBDGestEntry on: st [
 
 	st
-		<< '<img src="' ;
-		<< aBDGestEntry couverture ;
+		<< '<img src="data:image/png;base64,' ;
+		<< (self pictureB64: aBDGestEntry couverture) ;
 		<< '" align="left" width="117" height="157" border="0"/>' ;
-		lf
+		cr
 ]
 
-{ #category : #export }
+{ #category : #'export entry' }
 BDGestHTMLExporter >> exportEntryDepotLegal: aBDGestEntry on: st [
 
 	self beforeText: st.
@@ -104,7 +106,7 @@ BDGestHTMLExporter >> exportEntryDepotLegal: aBDGestEntry on: st [
 	self afterText: st
 ]
 
-{ #category : #export }
+{ #category : #'export entry' }
 BDGestHTMLExporter >> exportEntryEditeur: aBDGestEntry on: st [
 
 	self beforeText: st.
@@ -113,7 +115,7 @@ BDGestHTMLExporter >> exportEntryEditeur: aBDGestEntry on: st [
 	self afterText: st
 ]
 
-{ #category : #export }
+{ #category : #'export entry' }
 BDGestHTMLExporter >> exportEntrySerie: aBDGestEntry on: st [
 
 	self beforeText: st.
@@ -124,7 +126,7 @@ BDGestHTMLExporter >> exportEntrySerie: aBDGestEntry on: st [
 	self afterText: st
 ]
 
-{ #category : #export }
+{ #category : #'export entry' }
 BDGestHTMLExporter >> exportEntryTitre: aBDGestEntry on: st [
 
 	self beforeText: st.
@@ -155,4 +157,13 @@ BDGestHTMLExporter >> headerOn: st [
 </head>
 <body lang="en-US" dir="ltr">
 <table>'
+]
+
+{ #category : #'private - utility' }
+BDGestHTMLExporter >> pictureB64: url [
+
+	| byteArray |
+	byteArray := ZnClient new get: url.
+
+	^(Base64MimeConverter mimeEncode: byteArray readStream) contents
 ]
